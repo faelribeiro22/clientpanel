@@ -2,7 +2,6 @@ import React from 'react';
 import Clients from '../clients/Clients';
 import Sidebar from '../layout/Sidebar';
 
-
 export default function Dashboard() {
   return (
     <div className="row">
@@ -13,5 +12,5 @@ export default function Dashboard() {
         <Sidebar />
       </div>
     </div>
-  )
+  );
 }

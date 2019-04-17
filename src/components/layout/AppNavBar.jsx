@@ -7,25 +7,25 @@ import { firebaseConnect } from 'react-redux-firebase';
 
 class AppNavBar extends Component {
   state = {
-    isAuthenticated: false
+    isAuthenticated: false,
   };
 
   static getDerivedStateFromProps(props, state) {
     const { auth } = props;
 
     if (auth.uid) {
-      return { isAuthenticated: true }
+      return { isAuthenticated: true };
     } else {
-      return { isAuthenticated: false }
+      return { isAuthenticated: false };
     }
   }
 
-  onLogoutClick = (e) => {
+  onLogoutClick = e => {
     e.preventDefault();
 
     const { firebase } = this.props;
     firebase.logout();
-  }
+  };
 
   render() {
     const { isAuthenticated } = this.state;
@@ -42,17 +42,17 @@ class AppNavBar extends Component {
             data-toggle="collapse"
             data-target="#navbarMain"
           >
-            <span className="navbar-toggler-iccon"></span>
+            <span className="navbar-toggler-iccon" />
           </button>
           <div className="collapse navbar-collapse" id="navbarMain">
             <ul className="navbar-nav mr-auto">
-            {isAuthenticated ? (
-              <li className="nav-item">
-                <Link to="/" className="nav-link">
-                  Dashboard
-                </Link>
-              </li>
-            ) : null}
+              {isAuthenticated ? (
+                <li className="nav-item">
+                  <Link to="/" className="nav-link">
+                    Dashboard
+                  </Link>
+                </li>
+              ) : null}
             </ul>
             {isAuthenticated ? (
               <ul className="navbar-nav ml-auto">
@@ -62,7 +62,11 @@ class AppNavBar extends Component {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a href="#!" className="nav-link" onClick={this.onLogoutClick}>
+                  <a
+                    href="#!"
+                    className="nav-link"
+                    onClick={this.onLogoutClick}
+                  >
                     Logout
                   </a>
                 </li>
@@ -71,16 +75,16 @@ class AppNavBar extends Component {
           </div>
         </div>
       </nav>
-    )
+    );
   }
 }
 AppNavBar.propTypes = {
   firebase: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 export default compose(
   firebaseConnect(),
   connect((state, props) => ({
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
   }))
 )(AppNavBar);

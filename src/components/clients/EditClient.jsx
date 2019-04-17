@@ -14,7 +14,6 @@ class EditClient extends Component {
     this.emailInput = React.createRef();
     this.phoneInput = React.createRef();
     this.balanceInput = React.createRef();
-
   }
 
   onSubmit = e => {
@@ -25,21 +24,25 @@ class EditClient extends Component {
       lastName: this.lastNameInput.current.value,
       email: this.emailInput.current.value,
       phone: this.phoneInput.current.value,
-      balance: this.balanceInput.current.value === '' ? 0 : this.balanceInput.current.value,
+      balance:
+        this.balanceInput.current.value === ''
+          ? 0
+          : this.balanceInput.current.value,
     };
-    firestore.update({ collection: 'clients', doc: client.id}, updClient)
+    firestore
+      .update({ collection: 'clients', doc: client.id }, updClient)
       .then(history.push('/'));
-  }
+  };
 
   render() {
-    const { client }  = this.props;
+    const { client } = this.props;
     if (client) {
       return (
         <div>
           <div className="row">
             <div className="col-md-6">
               <Link to="/" className="btn btn-link">
-                <i className="fas fa-arrow-circle-left"/> Back To Dashboard
+                <i className="fas fa-arrow-circle-left" /> Back To Dashboard
               </Link>
             </div>
           </div>
@@ -72,7 +75,6 @@ class EditClient extends Component {
                     ref={this.lastNameInput}
                   />
                 </div>
-
 
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
@@ -108,27 +110,31 @@ class EditClient extends Component {
                     ref={this.balanceInput}
                   />
                 </div>
-                <input type="submit" value="Submit" className="btn btn-primary btn-block"/>
+                <input
+                  type="submit"
+                  value="Submit"
+                  className="btn btn-primary btn-block"
+                />
               </form>
             </div>
           </div>
         </div>
-      )
+      );
     } else {
-      return <Spinner />
+      return <Spinner />;
     }
   }
 }
 
 EditClient.propTypes = {
-  firestore: PropTypes.object.isRequired
-}
+  firestore: PropTypes.object.isRequired,
+};
 
 export default compose(
   firestoreConnect(props => [
-    { collection: 'clients', storeAs: 'client', doc: props.match.params.id }
+    { collection: 'clients', storeAs: 'client', doc: props.match.params.id },
   ]),
-  connect(({ firestore: { ordered }}, props) => ({
-    client: ordered.client && ordered.client[0]
+  connect(({ firestore: { ordered } }, props) => ({
+    client: ordered.client && ordered.client[0],
   }))
 )(EditClient);

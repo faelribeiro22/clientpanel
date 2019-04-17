@@ -7,20 +7,22 @@ import { firebaseConnect } from 'react-redux-firebase';
 class Login extends Component {
   state = {
     email: '',
-    password: ''
-  }
+    password: '',
+  };
 
-  onChange = e => this.setState({[e.target.name]: e.target.value});
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   onSubmit = e => {
     e.preventDefault();
     const { firebase } = this.props;
     const { email, password } = this.state;
-    firebase.login({
-      email,
-      password
-    }).catch(err => alert('Invalided'));
-  }
+    firebase
+      .login({
+        email,
+        password,
+      })
+      .catch(err => alert('Invalided'));
+  };
   render() {
     return (
       <div className="row">
@@ -29,8 +31,7 @@ class Login extends Component {
             <div className="card-body">
               <h1 className="text-center pb-4 pt-3">
                 <span className="text-primary">
-                  <i className="fas fa-lock"></i>{' '}
-                  Login
+                  <i className="fas fa-lock" /> Login
                 </span>
               </h1>
               <form onSubmit={this.onSubmit}>
@@ -56,18 +57,22 @@ class Login extends Component {
                     onChange={this.onChange}
                   />
                 </div>
-                <input type="submit" value="Login" className="btn btn-primary btn-block"/>
+                <input
+                  type="submit"
+                  value="Login"
+                  className="btn btn-primary btn-block"
+                />
               </form>
             </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
 Login.propTypes = {
   firebase: PropTypes.object.isRequired,
-}
+};
 
 export default firebaseConnect()(Login);

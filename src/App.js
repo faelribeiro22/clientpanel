@@ -12,8 +12,6 @@ import ClientDetails from './components/clients/ClientDetails';
 import EditClient from './components/clients/EditClient';
 import Login from './components/auth/Login';
 
-
-
 import './App.css';
 
 class App extends Component {
@@ -25,11 +23,31 @@ class App extends Component {
             <AppNavbar />
             <div className="container">
               <Switch>
-                <Route exact path="/" component={UserIsAuthenticated(Dashboard)}></Route>
-                <Route exact path="/client/add" component={UserIsAuthenticated(AddClient)}></Route>
-                <Route exact path="/client/edit/:id" component={UserIsAuthenticated(EditClient)}></Route>
-                <Route exact path="/client/:id" component={UserIsAuthenticated(ClientDetails)}></Route>
-                <Route exact path="/login" component={UserIsNotAuthenticated(Login)}></Route>
+                <Route
+                  exact
+                  path="/"
+                  component={UserIsAuthenticated(Dashboard)}
+                />
+                <Route
+                  exact
+                  path="/client/add"
+                  component={UserIsAuthenticated(AddClient)}
+                />
+                <Route
+                  exact
+                  path="/client/edit/:id"
+                  component={UserIsAuthenticated(EditClient)}
+                />
+                <Route
+                  exact
+                  path="/client/:id"
+                  component={UserIsAuthenticated(ClientDetails)}
+                />
+                <Route
+                  exact
+                  path="/login"
+                  component={UserIsNotAuthenticated(Login)}
+                />
               </Switch>
             </div>
           </div>

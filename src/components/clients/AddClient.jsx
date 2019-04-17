@@ -11,10 +11,10 @@ class AddClient extends Component {
     lastName: '',
     email: '',
     phone: '',
-    balance: ''
+    balance: '',
   };
 
-  onSubmit = (e) => {
+  onSubmit = e => {
     e.preventDefault();
 
     const newClient = this.state;
@@ -23,10 +23,12 @@ class AddClient extends Component {
     if (newClient.balance === 0) {
       newClient.balance = 0;
     }
-    firestore.add({ collection: 'clients'}, newClient).then(() => this.props.history.push('/'));
-  }
+    firestore
+      .add({ collection: 'clients' }, newClient)
+      .then(() => this.props.history.push('/'));
+  };
 
-  onChange = (e) => this.setState({ [e.target.name]: e.target.value });
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   render() {
     return (
@@ -34,7 +36,7 @@ class AddClient extends Component {
         <div className="row">
           <div className="col-md-6">
             <Link to="/" className="btn btn-link">
-              <i className="fas fa-arrow-circle-left"/> Back To Dashboard
+              <i className="fas fa-arrow-circle-left" /> Back To Dashboard
             </Link>
           </div>
         </div>
@@ -67,7 +69,6 @@ class AddClient extends Component {
                   required
                 />
               </div>
-
 
               <div className="form-group">
                 <label htmlFor="email">Email</label>
@@ -103,17 +104,21 @@ class AddClient extends Component {
                   value={this.state.balance}
                 />
               </div>
-              <input type="submit" value="Submit" className="btn btn-primary btn-block"/>
+              <input
+                type="submit"
+                value="Submit"
+                className="btn btn-primary btn-block"
+              />
             </form>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
 AddClient.propTypes = {
-  firestore: PropTypes.object.isRequired
-}
+  firestore: PropTypes.object.isRequired,
+};
 
 export default firestoreConnect()(AddClient);
