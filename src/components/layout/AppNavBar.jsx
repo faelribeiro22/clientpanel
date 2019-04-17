@@ -20,6 +20,13 @@ class AppNavBar extends Component {
     }
   }
 
+  onLogoutClick = (e) => {
+    e.preventDefault();
+
+    const { firebase } = this.props;
+    firebase.logout();
+  }
+
   render() {
     const { isAuthenticated } = this.state;
     const { auth } = this.props;
@@ -50,7 +57,12 @@ class AppNavBar extends Component {
             {isAuthenticated ? (
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <a href="#!" className="nav-link" onClick={this.onLogOutClick}>
+                  <a href="#!" className="nav-link">
+                    {auth.email}
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="#!" className="nav-link" onClick={this.onLogoutClick}>
                     Logout
                   </a>
                 </li>
@@ -71,4 +83,4 @@ export default compose(
   connect((state, props) => ({
     auth: state.firebase.auth
   }))
-) ;
+)(AppNavBar);
