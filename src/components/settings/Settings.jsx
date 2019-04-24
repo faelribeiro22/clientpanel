@@ -10,12 +10,12 @@ import {
 
 class Settings extends Component {
   disableBalanceOnEditChange = () => {
-    const { setDisableBalanceOnAdd } = this.props;
-    setDisableBalanceOnAdd();
+    const { setDisableBalanceOnEdit } = this.props;
+    setDisableBalanceOnEdit();
   };
 
   disableBalanceOnAddChange = () => {
-    const { setDisableBalanceOnEdit } = this.props;
+    const { setDisableBalanceOnAdd } = this.props;
     setDisableBalanceOnAdd();
   };
 
